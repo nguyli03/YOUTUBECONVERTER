@@ -9,15 +9,11 @@ import requests as req
 app = Flask(__name__)
 mongo = PyMongo(app)
 
-@app.route('/proxy/youtubegettermain', methods=['GET'])
+@app.route('/proxy/youtubegettermain/<string:url>', methods=['GET'])
 def do_proxy():
     args = request.url.split('?')[1]
-    #res = req.get('https://api.meetup.com/2/events?key=163b1a1f7e132d77122c72f55111458&group_urlname=ny-tech&sign=true')
-    #res = req.get('https://api.meetup.com/2/groups?key=163b1a1f7e132d77122c72f55111458&sign=true&{}'.format(args)+'') #v1
-    #res = req.get('https://api.meetup.com/find/events?key=163b1a1f7e132d77122c72f55111458&sign=true&{}'.format(args)+'') #v2
-    # res = req.get('https://api.meetup.com/2/groups?key=163b1a1f7e132d77122c72f55111458&sign=true&{}'.format(args)) #v3 (Category support)
-    res = req.get('http://www.youtubeinmp3.com/fetch/?format=JSON&video=http://www.youtube.com/watch?v=i62Zjga8JOM')
-    #test = "https://api.meetup.com/2/groups?key=163b1a1f7e132d77122c72f55111458&sign=true&photo-host=public&zip=94066&page=20"
+    url = "http://www.youtube.com/watch?v=i62Zjga8JOM"
+    res = req.get('http://www.youtubeinmp3.com/fetch/?format=JSON&video={}'.format(url))
     return res.text
 
 @app.route('/proxy/weather/<string:state>/<string:city>', methods=['GET'])
