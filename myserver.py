@@ -10,7 +10,7 @@ app = Flask(__name__)
 mongo = PyMongo(app)
 
 @app.route('/proxy/youtubegettermain/<string:url>', methods=['GET'])
-def do_proxy():
+def do_proxy(url):
     args = request.url.split('?')[1]
     url = "http://www.youtube.com/watch?v=i62Zjga8JOM"
     res = req.get('http://www.youtubeinmp3.com/fetch/?format=JSON&video={}'.format(url))
