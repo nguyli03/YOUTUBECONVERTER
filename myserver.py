@@ -12,7 +12,7 @@ mongo = PyMongo(app)
 @app.route('/proxy/youtubegettermain/', methods=['GET'])
 def do_proxy():
     args = request.url.split("?")[1]
-    res = req.get('http://www.youtubeinmp3.com/fetch/?format=text&video=https://www.youtube.com/watch?v={}'.format(args))
+    res = req.get('http://www.youtubeinmp3.com/fetch/?format=JSON&video=https://www.youtube.com/watch?v={}'.format(args))
     return res.text
 
 
@@ -21,13 +21,6 @@ def get_url():
     args = request.url.split("?")[1]
     print(args)
     res = req.get('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+args+'&type=video&videoDefinition=high&key=AIzaSyALErhy00FVzLkMGiK3bZTubiPXZzw4YIA')
-    return res.text
-
-@app.route('/proxy/weather/<string:state>/<string:city>', methods=['GET'])
-def get_weather(state,city):
-    print("helloword")
-    res=req.get("http://api.wunderground.com/api/f5c219a47e0685f8/conditions/q/{}/{}.json".format(state,city))
-    print(res)
     return res.text
 
 if __name__ == "__main__":
